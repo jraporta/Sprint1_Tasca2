@@ -43,7 +43,7 @@ public class App {
 				break;
 			}
 		}while (opcio != 0);
-
+		Entrada.close();
 	}
 
 }

@@ -141,4 +141,8 @@ public class Entrada {
 		return miBoolean;
 	}
 	
+	public static void close() {
+		entrada.close();
+	}
+	
 }
