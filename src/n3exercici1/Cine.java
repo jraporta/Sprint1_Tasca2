@@ -13,6 +13,7 @@ public class Cine {
 	public Cine() {
 		this.gestio = new GestioButaques();
 		this.demanarDadesInicials();
+		System.out.println("Cinema creat.");
 	}
 	
 	public void iniciar() {
@@ -20,10 +21,11 @@ public class Cine {
 	
 		do {
 			switch(this.menu()) {
-			case 1:
+			case 1:				
 				for (Butaca butaca : mostrarButaques()) {
 					System.out.println(butaca + "\n");
 				}
+			
 				break;
 			case 2:
 				try {
@@ -56,7 +58,7 @@ public class Cine {
 	
 	
 	public int menu() {
-		final String MENU = "Indica una opció:"
+		final String MENU = "\nIndica una opció:"
 				+ "\n1.- Mostrar totes les butaques reservades."
 				+ "\n2.- Mostrar les butaques reservades per una persona."
 				+ "\n3.- Reservar una butaca."
@@ -89,6 +91,7 @@ public class Cine {
 			seient = introduirSeient();
 			persona = introduirPersona();
 			gestio.afegirButaca(new Butaca(fila, seient, persona));
+			System.out.println("Butaca reservada");
 		} catch (ExcepcioNomPersonaIncorrecte e) {
 			System.out.println(e.getMessage());
 		} catch (ExcepcioSeientIncorrecte e) {
@@ -103,6 +106,7 @@ public class Cine {
 	public void anularReserva() {
 		try {
 			gestio.eliminarButaca(introduirFila(), introduirSeient());
+			System.out.println("Reserva eliminada");
 		} catch (ExcepcioButacaLliure | ExcepcioFilaIncorrecta | ExcepcioSeientIncorrecte e) {
 			System.out.println(e.getMessage());
 		}
@@ -110,9 +114,12 @@ public class Cine {
 	
 	public void anularReservaPersona() {
 		try {
+			int i = 0;
 			for (Butaca butaca : mostrarButaquesPersona(introduirPersona())){
 				gestio.eliminarButaca(butaca.getFila(), butaca.getSeient());
+				i++;
 			}
+			System.out.println(i > 0 ? String.format("Eliminada una reserva de %d butaques.", i) : "No hi ha cap reserva a aquest nom.");
 		} catch (ExcepcioNomPersonaIncorrecte | ExcepcioButacaLliure e) {
 			System.out.println(e.getMessage());
 		}
