@@ -24,10 +24,13 @@ public class Butaca {
 		return this.persona;
 	}
 	
-	public boolean equals(Butaca butaca) {
+	@Override
+	public boolean equals(Object o) {
+		Butaca butaca = (Butaca) o;
 		return this.fila == butaca.fila && this.seient == butaca.seient;
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("Fila: %d, Seient: %d, Persona: %s", this.fila, this.seient, this.persona);
 	}

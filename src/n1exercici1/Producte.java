@@ -14,6 +14,7 @@ public class Producte {
 		return this.preu;
 	}
 	
+	@Override
 	public String toString() {
 		return String.format("Producte: %s - Preu: %s€", this.nom, this.preu);
 	}

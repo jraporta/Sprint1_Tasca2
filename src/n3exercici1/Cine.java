@@ -57,7 +57,7 @@ public class Cine {
 	}
 	
 	
-	public int menu() {
+	private int menu() {
 		final String MENU = "\nIndica una opció:"
 				+ "\n1.- Mostrar totes les butaques reservades."
 				+ "\n2.- Mostrar les butaques reservades per una persona."
@@ -68,11 +68,11 @@ public class Cine {
 		return Entrada.llegirInt(MENU);
 	}
 	
-	public ArrayList<Butaca> mostrarButaques() {
+	private ArrayList<Butaca> mostrarButaques() {
 		return this.gestio.getButaques();
 	}
 	
-	public ArrayList<Butaca> mostrarButaquesPersona(String persona) {
+	private ArrayList<Butaca> mostrarButaquesPersona(String persona) {
 		ArrayList<Butaca> butaques = new ArrayList<Butaca>();
 		for (Butaca butaca : mostrarButaques()) {
 			if(butaca.getPersona().equalsIgnoreCase(persona)) {
@@ -82,7 +82,7 @@ public class Cine {
 		return butaques;
 	}
 	
-	public void reservarButaca() {
+	private void reservarButaca() {
 		int fila = 0, seient = 0;
 		String persona = "";
 		
@@ -92,18 +92,12 @@ public class Cine {
 			persona = introduirPersona();
 			gestio.afegirButaca(new Butaca(fila, seient, persona));
 			System.out.println("Butaca reservada");
-		} catch (ExcepcioNomPersonaIncorrecte e) {
-			System.out.println(e.getMessage());
-		} catch (ExcepcioSeientIncorrecte e) {
-			System.out.println(e.getMessage());
-		} catch (ExcepcioFilaIncorrecta e) {
-			System.out.println(e.getMessage());
-		} catch (ExcepcioButacaOcupada e) {
+		} catch (ExcepcioNomPersonaIncorrecte | ExcepcioSeientIncorrecte | ExcepcioFilaIncorrecta | ExcepcioButacaOcupada e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void anularReserva() {
+	private void anularReserva() {
 		try {
 			gestio.eliminarButaca(introduirFila(), introduirSeient());
 			System.out.println("Reserva eliminada");
@@ -112,7 +106,7 @@ public class Cine {
 		}
 	}
 	
-	public void anularReservaPersona() {
+	private void anularReservaPersona() {
 		try {
 			int i = 0;
 			for (Butaca butaca : mostrarButaquesPersona(introduirPersona())){
@@ -125,7 +119,7 @@ public class Cine {
 		}
 	}
 	
-	public String introduirPersona() throws ExcepcioNomPersonaIncorrecte{
+	private String introduirPersona() throws ExcepcioNomPersonaIncorrecte{
 		String nom = Entrada.llegirString("Introdueix el nom de la persona");
 		for (int i = 0 ; i < nom.length() ; i++) {
 			if (nom.charAt(i) >= 48 && nom.charAt(i) <= 57) {
@@ -135,12 +129,12 @@ public class Cine {
 		return nom;
 	}
 	
-	public void demanarDadesInicials(){
+	private void demanarDadesInicials(){
 		this.numFiles = Entrada.llegirInt("Indica el nombre de files del cinema: ");
 		this.numSeients = Entrada.llegirInt("Indica el nombre de seients per fila: ");
 	}
 	
-	public int introduirFila() throws ExcepcioFilaIncorrecta{
+	private int introduirFila() throws ExcepcioFilaIncorrecta{
 		int fila = Entrada.llegirInt("Indica el número de fila");
 		if (!(fila > 0 && fila <= this.numFiles)) {
 			throw new ExcepcioFilaIncorrecta("Error, el número de fila és incorrecte");
@@ -148,7 +142,7 @@ public class Cine {
 		return fila;
 	}
 	
-	public int introduirSeient() throws ExcepcioSeientIncorrecte{
+	private int introduirSeient() throws ExcepcioSeientIncorrecte{
 		int fila = Entrada.llegirInt("Indica el número de seient");
 		if (!(fila > 0 && fila <= this.numSeients)) {
 			throw new ExcepcioSeientIncorrecte("Error, el número de seient és incorrecte");

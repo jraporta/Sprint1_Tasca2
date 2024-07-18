@@ -31,14 +31,15 @@ public class Venda {
 	public void calcularTotal() throws VendaBuidaException{
 		if (productes.isEmpty()) {
 			throw new VendaBuidaException("Per fer una venda primer has d'afegir productes");
-		}else {
-			this.preuTotal = 0;
-			for(Producte producte : productes) {
-				this.preuTotal += producte.getPreu();
-			}
 		}
+		this.preuTotal = 0;
+		for(Producte producte : productes) {
+			this.preuTotal += producte.getPreu();
+		}
+		
 	}
 	
+	@Override
 	public String toString() {
 		String resposta = productes.isEmpty() ? "La cistella està buida" : "Els productes de la cistella són:";
 		int i = 1;
